@@ -32,11 +32,10 @@ void setup() {
   
   
   analogComparator.setOn(); //we instruct the lib to use voltages on the pins
-  analogComparator.enableInterrupt(changeStatus, CHANGE); //FALLING when A0 ref is smaller tha A1 sensor
+  analogComparator.enableInterrupt(changeStatus, FALLING); //FALLING when A0 ref is smaller tha A1 sensor
   Serial.begin(9600);
 }
 void loop() {
-  
 time1 = micros();
 while (micros() < time1 + halfpi){
 }
@@ -47,6 +46,7 @@ while (micros() < time1 + halfpi){
 stato = !stato;
 
 Serial.println(tau);
+delay(1000);
 }
 
 void changeStatus() {
