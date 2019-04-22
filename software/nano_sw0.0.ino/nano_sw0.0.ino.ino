@@ -2,7 +2,7 @@
 #define ref  A0
 #define sens A1
 #define ctrl A2
-#define pump 6
+#define pump 5
 
 #define halfpi 100
 
@@ -33,7 +33,7 @@ void setup() {
   
   analogComparator.setOn(); //we instruct the lib to use voltages on the pins
   analogComparator.enableInterrupt(changeStatus, CHANGE); //FALLING when A0 ref is smaller tha A1 sensor
-  //Serial.begin(9600);
+  Serial.begin(9600);
 }
 void loop() {
   
@@ -46,12 +46,12 @@ while (micros() < time1 + halfpi){
 
 stato = !stato;
 
-
+Serial.println(tau);
 }
 
 void changeStatus() {
     interrupt = true; //let's inform the main loop that the condition has been reached by the analog comparator
     time2 = micros();
     tau = time2 - time1;
-    digitalWrite(pump, HIGH);
+ digitalWrite(pump, HIGH);
 }
