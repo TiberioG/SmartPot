@@ -1,9 +1,12 @@
 #include "analogComp.h" //library used to control analog comparator of microcontroller
 // definistions of pins
-#define ref  A0
-#define sens A1
-#define ctrl A2
+
+#define ctrl 8
+#define ref1 9
+#define ref2 5
+#define ref  7
 #define pump 5
+#define sens 6
 #define halfpi 100
 boolean interrupt = false;
 unsigned long time1;
@@ -16,13 +19,13 @@ void setup() {
   pinMode(ref, INPUT);
   pinMode(sens, INPUT);
   pinMode(ctrl, OUTPUT);
-  pinMode(A3, OUTPUT);
-  pinMode(A4, OUTPUT);
+  pinMode(ref1, OUTPUT);
+  pinMode(ref2, OUTPUT);
   pinMode(pump, OUTPUT);
   
   digitalWrite(ctrl, LOW);
-  digitalWrite(A3, HIGH);
-  digitalWrite(A4, LOW);
+  digitalWrite(ref1, HIGH);
+  digitalWrite(ref2, LOW);
   digitalWrite(pump, LOW); 
   
   analogComparator.setOn(); //we instruct the lib to use voltages on the default pins AIN0 AIN1
@@ -35,8 +38,8 @@ time1 = micros();  // save inistial time
 while (micros() < time1 + halfpi){ 
 } 
  digitalWrite(ctrl, state);
- digitalWrite(A3, state);
- digitalWrite(A4, !state);
+ digitalWrite(ref1, state);
+ digitalWrite(ref2, !state);
 // invert state for second-half part of square wave
 state = !state;
 delay (1000); // sampling time of soil
