@@ -5,7 +5,7 @@
 #define ref1 9
 #define ref2 5
 #define ref  7
-#define pump 5
+#define pump A3
 #define sens 6
 #define halfpi 100
 boolean interrupt = false;
@@ -16,8 +16,8 @@ bool state = 1;
 
 void setup() {
   
-  pinMode(ref, INPUT);
-  pinMode(sens, INPUT);
+  //pinMode(ref, INPUT);
+  //pinMode(sens, INPUT);
   pinMode(ctrl, OUTPUT);
   pinMode(ref1, OUTPUT);
   pinMode(ref2, OUTPUT);
@@ -44,10 +44,10 @@ while (micros() < time1 + halfpi){
 state = !state;
 delay (1000); // sampling time of soil
 Serial.println(tau); // show the time cosntsnt
-if( tau > 200){
-  digitalWrite(pump, HIGH); // turn pump on
+if( tau > 180){
+  digitalWrite(pump, LOW); // turn pump off
   } else{
-  digitalWrite(pump, LOW);
+  digitalWrite(pump, HIGH);
   }
 }
 // interrupt function
